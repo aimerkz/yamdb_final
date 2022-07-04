@@ -29,12 +29,12 @@ class Command(BaseCommand):
         cur = con.cursor()
 
         for file in os.listdir(PATH_DIR):
-            PATH_TO_FILE = os.path.join(PATH_DIR, file)
+            path_to_file = os.path.join(PATH_DIR, file)
             table_name = CONFORMITY[
                 os.path.splitext(os.path.basename(file))[0]
             ]
 
-            with open(PATH_TO_FILE, 'r', encoding='utf-8') as f_open_csv:
+            with open(path_to_file, 'r', encoding='utf-8') as f_open_csv:
                 rows = csv.DictReader(f_open_csv)
 
                 for row in rows:
@@ -56,7 +56,7 @@ class Command(BaseCommand):
         print('======================================')
         print()
 
-# Что бы скрипт работал пришлось видоизменить CSV файлы
+# Чтобы скрипт работал пришлось видоизменить CSV файлы
 # users добавил is_superuser,is_staff,is_active,date_joined и confirmation_code
 # также необходимо добавить по 1 запятой для каждого столбца
 # Для confirmation_code из-за уникальности параметра
