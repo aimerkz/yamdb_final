@@ -11,7 +11,7 @@ services:
   web:
     build: ../api_yamdb/
     restart: always
-    image: merkulovai/infra_sp2:latest
+    image: merkulovai/api_yamdb:latest
     volumes:
       - static_value:/app/static/
       - media_value:/app/media/
