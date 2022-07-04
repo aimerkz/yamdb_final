@@ -28,7 +28,7 @@ jobs:
     - name: Test with flake8 and pytest
       run: |
         # запуск проверки проекта по flake8 и pytest
-        python3 flake8
+        python3 -m flake8
         pytest
 
   build_and_push_to_docker_hub:
