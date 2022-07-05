@@ -13,7 +13,7 @@
 ## _Запуск_:
  - Клонируйте репозиторий на свою локальную машину:
 ```sh
-https://github.com/aimerkz/infra_sp2.git
+https://github.com/aimerkz/yamdb_final.git
 cd infra
 ```
  - Cоздайте в папке /infra файл .env и заполните его переменными окружения:
