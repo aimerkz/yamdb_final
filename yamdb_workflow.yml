@@ -51,7 +51,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: merkulovai/yamdb_final:latest
+          tags: merkulovai/api_yamdb:latest
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
@@ -64,11 +64,17 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
-          # Выполняет pull образа с DockerHub
-          sudo docker pull merkulovai/yamdb_final
-          #остановка всех контейнеров
-          sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 5000:5000 merkulovai/yamdb_final
+            sudo docker-compose stop
+            sudo docker-compose rm web
+            touch .env
+            echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
+            echo DB_NAME=${{ secrets.DB_NAME }} >> .env
+            echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
+            echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
+            echo DB_HOST=${{ secrets.DB_HOST }} >> .env
+            echo DB_PORT=${{ secrets.DB_PORT }} >> .env
+            sudo docker image pull merkulovai/api_yamdb:latest
+            sudo docker-compose up -d
   
   # Отправка отчета в телеграм
   send_message:
