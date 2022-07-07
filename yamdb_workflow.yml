@@ -50,6 +50,7 @@ jobs:
         # Пуш образа в Docker Hub 
         uses: docker/build-push-action@v2
         with:
+        context: ./api_yamdb
           push: true
           tags: merkulovai/yamdb_final:v1
   deploy:
